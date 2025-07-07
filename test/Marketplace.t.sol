@@ -46,21 +46,14 @@ contract MarketplaceTest is Test{
 
       //user lista NFT 
       vm.prank(user);
-      marketplace.PulishNFT(address(nft), 1, 1 ether);
+      marketplace.PublishNFT(address(nft), 1, 1 ether);
       // verificamos que se guardo correctamente
       (address owner, address nftContract, uint256 tokenId, uint256 price) = marketplace.listings(1);
       assertEq(owner, user);
       assertEq(price, 1 ether);
     }
 
-    // Probar que se pueda comprar un NFT en el mercado
-    // Verificamos que el comprador pueda comprar un NFT publicado en el mercado
-    // Verificamos que el NFT se transfiera al comprador y que el vendedor reciba el dinero
-    // Verificamos que el NFT se elimine de la lista de ventas
-    // Verificamos que el comprador no pueda comprar su propio NFT
-    // Verificamos que el comprador no pueda comprar un NFT que no esta en venta
-    // Verificamos que el comprador no pueda comprar un NFT por un precio incorrecto
-    // Verificamos que el comprador no pueda comprar un NFT que no existe
+    
     function testBuyNFT() public {
         // 1 Preparar el `escenario: dar Ether al buyer
         vm.deal(buyer, 1 ether);
@@ -73,7 +66,7 @@ contract MarketplaceTest is Test{
         nft.approve(address(marketplace), 1);
         // 2. El user publica el NFT (lo pone en venta)
         vm.prank(user);
-        marketplace.PulishNFT(address(nft), 1, 1 ether);
+        marketplace.PublishNFT(address(nft), 1, 1 ether);
 
         // 3. Verificamos que la publicación se guardó correctamente
         (address owner, address nftContract, uint256 tokenId, uint256 price) = marketplace.listings(1);
@@ -102,7 +95,7 @@ contract MarketplaceTest is Test{
     vm.prank(atacante);
     // Atacante intenta publicar un NFT que no posee
     vm.expectRevert("You are not the owner of this NFT");
-    marketplace.PulishNFT(address(nft), 1, 1 ether);
+    marketplace.PublishNFT(address(nft), 1, 1 ether);
 }
    //No podés comprar tu propio NFT
     function testCannotBuyOwnNFT() public {
@@ -110,7 +103,7 @@ contract MarketplaceTest is Test{
         nft.approve(address(marketplace), 1);
 
         vm.prank(user);
-        marketplace.PulishNFT(address(nft), 1, 1 ether);
+        marketplace.PublishNFT(address(nft), 1, 1 ether);
 
         vm.deal(user, 1 ether);
 
@@ -132,7 +125,7 @@ contract MarketplaceTest is Test{
         nft.approve(address(marketplace), 1);
 
         vm.prank(user);
-        marketplace.PulishNFT(address(nft), 1 , 1 ether);
+        marketplace.PublishNFT(address(nft), 1 , 1 ether);
 
         vm.deal(buyer, 0.5 ether);
         vm.prank(buyer);

@@ -13,7 +13,7 @@ contract Marketplace{
   }
    mapping(uint256 => Listing) public listings;
 
-   function PulishNFT(address _nftContract, uint256 _tokenId, uint256 _price) public {
+   function PublishNFT(address _nftContract, uint256 _tokenId, uint256 _price) public {
          require(_price > 0, "Price must be greater than zero");
          IERC721 nftContract = IERC721(_nftContract);
          require(nftContract.ownerOf(_tokenId) == msg.sender, "You are not the owner of this NFT");
