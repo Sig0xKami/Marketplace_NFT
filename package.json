@@ -12,5 +12,9 @@
   },
   "keywords": [],
   "author": "Sig0xKami",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^17.0.1",
+    "ethers": "^6.15.0"
+  }
 }
